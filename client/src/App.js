@@ -8,7 +8,12 @@ function App() {
     const web3 = new Web3(provider);
     const networkId = await web3.eth.net.getId();
     const deployedNetwork = SimpleStorage.networks[networkId];
-    console.log(deployedNetwork.address);
+    // console.log(deployedNetwork.address);
+    const contract = new web3.eth.Contract(
+      SimpleStorage.abi,
+      deployedNetwork.address
+    );
+    console.log(contract);
   }
   template();
 
