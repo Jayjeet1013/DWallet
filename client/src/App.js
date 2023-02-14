@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useEffect, useState} from 'react'
 import SimpleStorage from './contracts/SimpleStorage.json';
 import Web3 from 'web3';
 import './App.css';
@@ -8,8 +8,10 @@ function App() {
     web3:null,
     contract:null
   })
-  async function template() {
+  useEffect(()=>{
     const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
+      async function template() {
+    
     const web3 = new Web3(provider);
     const networkId = await web3.eth.net.getId();
     const deployedNetwork = SimpleStorage.networks[networkId];
@@ -21,8 +23,10 @@ function App() {
     setState({web3:web3,contract:contract})
     // console.log(contract);
   }
-  console.log(state);
-  template();
+  
+  provider && template();
+  },[])
+console.log(state);
 
   return <div className="App">
       
