@@ -25,7 +25,7 @@ function App() {
   }
   
   provider && template();
-  },[])
+  },[]);
 console.log(state);
 
   return <div className="App">
