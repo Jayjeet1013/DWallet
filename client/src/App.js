@@ -41,13 +41,15 @@ async function readContract(){
 
 async function writeContract(){
   const {contract} =state;
-  await contract.methods.setter(100).send();
+  await contract.methods.setter(100).send({from:"0xeEEaA0f512547767b105F0E1c4529378A2287483"});
+  
 }
 
   return  (
   <div className="App">
     <button onClick={getAccounts}> Get Accounts</button>  
     <button onClick={readContract}>Contract</button>  
+    <button onClick={writeContract}>Contract</button>  
 
     </div>
     );
