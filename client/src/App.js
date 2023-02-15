@@ -26,11 +26,26 @@ function App() {
   
   provider && template();
   },[]);
-console.log(state);
 
-  return <div className="App">
-      
-    </div>;
+async function getAccounts(){
+const {web3} =state;
+const accounts = await web3.eth.getAccounts();
+console.log(accounts);
+}
+
+async function readContract(){
+  const {contract}=state;
+  const value =await contract.methods.getter().call();
+  console.log(value);
+}
+
+  return  (
+  <div className="App">
+    <button onClick={getAccounts}> Get Accounts</button>  
+    <button onClick={readContract}>Contract</button>  
+
+    </div>
+    );
 }
 
 export default App;
