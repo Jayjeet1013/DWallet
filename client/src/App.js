@@ -39,6 +39,11 @@ async function readContract(){
   console.log(value);
 }
 
+async function writeContract(){
+  const {contract} =state;
+  await contract.methods.setter(100).send();
+}
+
   return  (
   <div className="App">
     <button onClick={getAccounts}> Get Accounts</button>  
