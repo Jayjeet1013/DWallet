@@ -8,6 +8,8 @@ function App() {
     web3:null,
     contract:null
   })
+  const [data,setData] =useState(null);
+  const [accounts,setAccounts]=useState([]);
   useEffect(()=>{
     const provider = new Web3.providers.HttpProvider("HTTP://127.0.0.1:7545");
       async function template() {
@@ -30,14 +32,23 @@ function App() {
 async function getAccounts(){
 const {web3} =state;
 const accounts = await web3.eth.getAccounts();
-console.log(accounts);
+// console.log(accounts);
+setAccounts(accounts);
 }
 
-async function readContract(){
+useEffect(()=>{
   const {contract}=state;
+async function readContract(){
+  
   const value =await contract.methods.getter().call();
-  console.log(value);
+setData(value);
 }
+
+contract && readContract();
+
+},[state])
+
+
 
 async function writeContract(){
   const {contract} =state;
@@ -48,11 +59,14 @@ async function writeContract(){
 
   return  (
   <div className="App">
-    <button onClick={getAccounts}> Get Accounts</button>  
-    <button onClick={readContract}>Contract</button>  
+    <button onClick={getAccounts}> Get Accounts</button>
+    <p>These are accounts: {accounts.map((account)=>{
+      return <li key={account}>{account}</li>
+    })}</p>  
+    {/* <button onClick={readContract}>Contract</button>   */}
     <br></br>
     <input type='text' id='data'></input>
-    <p></p>
+    <p>this is data: {data}</p>
     <button onClick={writeContract}>Contract</button>  
 
     </div>
