@@ -41,7 +41,8 @@ async function readContract(){
 
 async function writeContract(){
   const {contract} =state;
-  await contract.methods.setter(100).send({from:"0xeEEaA0f512547767b105F0E1c4529378A2287483"});
+  const data= document.querySelector('#data').value;
+  await contract.methods.setter(data).send({from:"0xeEEaA0f512547767b105F0E1c4529378A2287483"});
   
 }
 
@@ -49,6 +50,9 @@ async function writeContract(){
   <div className="App">
     <button onClick={getAccounts}> Get Accounts</button>  
     <button onClick={readContract}>Contract</button>  
+    <br></br>
+    <input type='text' id='data'></input>
+    <p></p>
     <button onClick={writeContract}>Contract</button>  
 
     </div>
